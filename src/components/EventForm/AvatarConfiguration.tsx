@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { LinkPreview } from "@/components/ui/link-preview"
 import { Plus, Trash2 } from "lucide-react"
 import { type Avatar } from "@/hooks/useEvents"
 
@@ -81,6 +82,9 @@ export function AvatarConfiguration({
                 placeholder="Cole o link do avatar..."
                 className="bg-muted border-border font-mono text-sm"
               />
+              {avatar.link && (
+                <LinkPreview url={avatar.link} className="mt-2" />
+              )}
             </div>
 
             <div className="space-y-2">

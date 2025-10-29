@@ -100,4 +100,30 @@
     mask-composite: exclude;
     pointer-events: none;
   }
+
+  @keyframes arrow-move-right {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(4px);
+    }
+  }
+
+  @keyframes arrow-move-left {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-4px);
+    }
+  }
+
+  .group:hover .arrow-right {
+    animation: arrow-move-right 1s ease-in-out infinite;
+  }
+
+  .group:hover .arrow-left {
+    animation: arrow-move-left 1s ease-in-out infinite;
+  }
 }

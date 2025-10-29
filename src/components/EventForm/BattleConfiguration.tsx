@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { LinkPreview } from "@/components/ui/link-preview"
 
 interface BattleConfigurationProps {
   matchupLegion1: string
@@ -69,9 +70,12 @@ export function BattleConfiguration({
           id="map"
           value={map}
           onChange={(e) => onMapChange(e.target.value)}
-          placeholder="Digite o nome do mundo VRChat..."
+          placeholder="Cole o link do mapa VRChat..."
           className="bg-background border-border font-mono"
         />
+        {map && (
+          <LinkPreview url={map} className="mt-2" />
+        )}
       </div>
     </div>
   )

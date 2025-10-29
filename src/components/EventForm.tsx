@@ -58,18 +58,18 @@ export function EventForm({ selectedDate, onClose }: EventFormProps) {
   }
 
   const formattedDate = selectedDate
-    ? selectedDate.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+    ? selectedDate.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    })
     : ""
 
   const allLegions = [...selectedLegions, ...(customLegion ? [customLegion] : [])]
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!selectedDate || !title.trim()) {
       alert('Por favor, preencha pelo menos o título do evento.')
       return
@@ -104,7 +104,7 @@ export function EventForm({ selectedDate, onClose }: EventFormProps) {
             </h2>
             <p className="text-sm text-muted-foreground font-mono mt-1">
               {"DATA: "}
-              {formattedDate.toUpperCase()}
+              {formattedDate}
             </p>
           </div>
           <Button
@@ -163,15 +163,17 @@ export function EventForm({ selectedDate, onClose }: EventFormProps) {
           <div className="flex gap-4 pt-4">
             <Button
               type="submit"
-              className="flex-1 bg-primary hover:bg-primary/80 text-primary-foreground font-mono tracking-wider uppercase"
+              className="flex-1 bg-primary hover:bg-primary/80 text-primary-foreground font-mono tracking-wider uppercase group cursor-pointer"
             >
-              {">> INICIAR EVENTO <<"}
+              <span className="inline-block arrow-right">{" >>"}</span>
+              {" INICIAR EVENTO "}
+              <span className="inline-block arrow-left">{"<< "}</span>
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
-              className="flex-1 border-destructive/50 text-destructive hover:bg-destructive/20 hover:border-destructive font-mono tracking-wider uppercase bg-transparent"
+              className="flex-1 border-destructive/50 text-destructive hover:bg-destructive/20 hover:border-destructive font-mono tracking-wider uppercase bg-transparent cursor-pointer"
             >
               {"ABORTAR"}
             </Button>
@@ -179,18 +181,20 @@ export function EventForm({ selectedDate, onClose }: EventFormProps) {
         </form>
       </div>
 
-      <EventPreview
-        formattedDate={formattedDate}
-        title={title}
-        description={description}
-        allLegions={allLegions}
-        matchupLegion1={matchupLegion1}
-        matchupLegion2={matchupLegion2}
-        map={map}
-        organizer={organizer}
-        supervisor={supervisor}
-        avatars={avatars}
-      />
+      <div className="lg:sticky lg:top-4 lg:self-start">
+        <EventPreview
+          formattedDate={formattedDate}
+          title={title}
+          description={description}
+          allLegions={allLegions}
+          matchupLegion1={matchupLegion1}
+          matchupLegion2={matchupLegion2}
+          map={map}
+          organizer={organizer}
+          supervisor={supervisor}
+          avatars={avatars}
+        />
+      </div>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { type Avatar } from "@/hooks/useEvents"
+import { LinkPreview } from "@/components/ui/link-preview"
 
 interface EventPreviewProps {
   formattedDate: string
@@ -80,7 +81,11 @@ export function EventPreview({
         {/* Map */}
         <div className="p-3 bg-muted/20 border border-border">
           <p className="text-xs font-mono text-muted-foreground uppercase mb-1">Mapa</p>
-          <p className="text-sm font-mono text-foreground">{map || "Não definido"}</p>
+          {map && map.startsWith("http") ? (
+            <LinkPreview url={map} className="mt-2" />
+          ) : (
+            <p className="text-sm font-mono text-foreground">{map || "Não definido"}</p>
+          )}
         </div>
 
         {/* Organizer */}
@@ -105,17 +110,22 @@ export function EventPreview({
               {avatars.map((avatar, index) => {
                 if (!avatar.link && !avatar.class) return null
                 return (
-                  <div key={avatar.id} className="p-2 bg-background border border-border/50">
-                    <p className="text-xs font-mono text-primary mb-1">Avatar {index + 1}</p>
-                    {avatar.link && (
-                      <p className="text-xs font-mono text-foreground break-all mb-1">
-                        <span className="text-muted-foreground">Link:</span> {avatar.link}
-                      </p>
+                  <div key={avatar.id} className="space-y-2">
+                    <div className="p-2 bg-background border border-border/50">
+                      <p className="text-xs font-mono text-primary mb-1">Avatar {index + 1}</p>
+                      {avatar.class && (
+                        <p className="text-xs font-mono text-foreground mb-1">
+                          <span className="text-muted-foreground">Classe:</span>{" "}
+                          <span className="text-primary">{avatar.class}</span>
+                        </p>
+                      )}
+                    </div>
+                    {avatar.link && avatar.link.startsWith("http") && (
+                      <LinkPreview url={avatar.link} className="mt-1" />
                     )}
-                    {avatar.class && (
-                      <p className="text-xs font-mono text-foreground">
-                        <span className="text-muted-foreground">Classe:</span>{" "}
-                        <span className="text-primary">{avatar.class}</span>
+                    {avatar.link && !avatar.link.startsWith("http") && (
+                      <p className="text-xs font-mono text-foreground break-all mb-1 px-2">
+                        <span className="text-muted-foreground">Link:</span> {avatar.link}
                       </p>
                     )}
                   </div>

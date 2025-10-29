@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={``}>
+      <body cz-shortcut-listen="true">
         {children}
       </body>
     </html>
