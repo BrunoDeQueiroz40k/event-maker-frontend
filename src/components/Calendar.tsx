@@ -43,7 +43,17 @@ export function Calendar({ onDateClick }: CalendarProps) {
     setCurrentDate(new Date(year, month + 1))
   }
 
+  const isPastDay = (day: number) => {
+    const today = new Date()
+    if (year < today.getFullYear()) return true
+    if (year > today.getFullYear()) return false
+    if (month < today.getMonth()) return true
+    if (month > today.getMonth()) return false
+    return day < today.getDate()
+  }
+
   const handleDayClick = (day: number) => {
+    if (isPastDay(day)) return
     const selectedDate = new Date(year, month, day)
     onDateClick(selectedDate)
   }
@@ -94,14 +104,21 @@ export function Calendar({ onDateClick }: CalendarProps) {
         })}
         {Array.from({ length: daysInMonth }).map((_, index) => {
           const day = index + 1
+          const past = isPastDay(day)
           return (
             <button
               key={day}
               onClick={() => handleDayClick(day)}
-              className="aspect-square border border-border hover:border-primary hover:bg-primary/10 transition-all flex items-center justify-center text-foreground font-mono text-[15px] group relative overflow-hidden"
+              className={`aspect-square border flex items-center justify-center font-mono text-[15px] transition-all relative overflow-hidden
+                ${past
+                  ? "border-border/60 bg-muted/30 text-muted-foreground/80 cursor-default"
+                  : "border-border hover:border-primary hover:bg-primary/10 text-foreground group"
+                }`}
             >
               <span className="relative z-10">{day}</span>
-              <div className="absolute inset-0 bg-primary/5 translate-y-full group-hover:translate-y-0 transition-transform" />
+              {!past && (
+                <div className="absolute inset-0 bg-primary/5 translate-y-full group-hover:translate-y-0 transition-transform" />
+              )}
             </button>
           )
         })}
