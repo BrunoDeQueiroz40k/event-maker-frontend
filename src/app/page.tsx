@@ -1,10 +1,11 @@
 "use client"
 
+import { useState } from "react"
+
 import { Calendar } from "@/components/Calendar"
 import { EventForm } from "@/components/EventForm"
 import { EventList } from "@/components/EventList"
 import { Header } from "@/components/Header"
-import { useState } from "react"
 
 export default function Home() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
@@ -19,17 +20,17 @@ export default function Home() {
     setShowEventForm(false)
     setSelectedDate(null)
   }
-  
+
   return (
     <main className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-primary mb-2 tracking-wider uppercase font-mono">
-            {"WARHAMMER 40K EVENT MAKER"}
+            WARHAMMER 40K EVENT MAKER
           </h1>
           <p className="text-muted-foreground font-mono text-sm tracking-wide">
-            {"VRCHAT BATTLE COORDINATION SYSTEM // IMPERIUM SANCTIONED"}
+            VRCHAT BATTLE COORDINATION SYSTEM // IMPERIUM SANCTIONED
           </p>
         </div>
 
