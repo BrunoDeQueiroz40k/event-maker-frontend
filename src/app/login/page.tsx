@@ -40,7 +40,7 @@ export default function LoginPage() {
               <ShieldIcon />
             </div>
             <h1 className="text-3xl font-bold text-imperial mb-2 tracking-wider">ACESSO IMPERIAL</h1>
-            <p className="text-sm text-gray-400 font-mono">{'// TERMINAL DE AUTENTICAÇÃO ///'}</p>
+            <p className="text-sm text-gray-400 font-mono">{'// TERMINAL DE AUTENTICAÇÃO //'}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
